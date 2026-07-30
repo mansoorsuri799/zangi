@@ -12,7 +12,7 @@ import {
   APP_RATING_VALUE,
   APP_RATING_COUNT,
 } from "@/lib/site";
-import DownloadButton from "@/components/DownloadButton";
+import { DownloadCtas } from "@/components/DownloadButton";
 import StepList from "@/components/StepList";
 import FaqAccordion from "@/components/FaqAccordion";
 import ReviewSnippet, {
@@ -315,7 +315,7 @@ export default function Home() {
         </p>
 
         <div id="download" className="flex justify-center mb-8 sm:mb-10 px-1">
-          <DownloadButton label="Download Zangi" />
+          <DownloadCtas />
         </div>
 
         {/* App info — simple table like WP */}
@@ -564,7 +564,7 @@ export default function Home() {
         </p>
 
         <div className="flex justify-center my-8">
-          <DownloadButton label="Download Zangi APK" />
+          <DownloadCtas apkLabel="Download Zangi APK" />
         </div>
 
         <h2>Data Consumption vs Other Apps</h2>
@@ -723,9 +723,7 @@ export default function Home() {
         </p>
 
         <div className="flex justify-center mt-8 mb-4">
-          <a href={DOWNLOAD_URL} className="cta-btn">
-            Download Now
-          </a>
+          <DownloadCtas apkLabel="Download Now" />
         </div>
       </article>
     </>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import StepList from '@/components/StepList';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ReviewSnippet from '@/components/ReviewSnippet';
+import { AppStoreButton } from '@/components/DownloadButton';
 import { SITE_URL, SITE_NAME, BRAND } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -95,14 +96,7 @@ export default function ZangiForIOSPage() {
               </p>
               <ReviewSnippet className="justify-center md:justify-start mb-4" />
               <div className="flex justify-center md:justify-start">
-                <a
-                  href="https://apps.apple.com/app/zangi-private-messenger/id1209492688"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-btn"
-                >
-                  Get Zangi on the App Store
-                </a>
+                <AppStoreButton />
               </div>
             </div>
           </div>
