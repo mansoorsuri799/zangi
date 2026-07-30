@@ -1,11 +1,11 @@
 {
-  "name": "Card Rummy",
-  "short_name": "Card Rummy",
-  "description": "Pakistan's premier card gaming platform offering Teen Patti, Rummy, Dragon vs Tiger and more. Earn real cash rewards!",
+  "name": "Zangi Private Messenger",
+  "short_name": "Zangi",
+  "description": "Download Zangi Private Messenger — secure chat, offline mode, no phone number required.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#06091F",
-  "theme_color": "#06091F",
+  "background_color": "#F3F6FA",
+  "theme_color": "#3070F0",
   "icons": [
     {
       "src": "/favicon.ico",
@@ -13,16 +13,10 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/card-rummy-logo.webp",
+      "src": "/zangi-app.webp",
       "sizes": "192x192 512x512",
       "type": "image/webp",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/card-rummy.webp",
-      "sizes": "512x512",
-      "type": "image/webp",
-      "purpose": "any"
     }
   ]
-} 
+}

@@ -1,272 +1,100 @@
 import { NextResponse } from 'next/server';
+import { SITE_URL } from '@/lib/site';
+
+type PageType = {
+  url: string;
+  changeFreq: string;
+  priority: number;
+  images?: Array<{ loc: string; title: string; caption: string }>;
+};
 
 export async function GET() {
-  const baseUrl = 'https://cardrummyapp.com.pk';
-  
-  // Define page type
-  type PageType = {
-    url: string;
-    lastMod: string;
-    changeFreq: string;
-    priority: number;
-    images?: Array<{
-      loc: string;
-      title: string;
-      caption: string;
-    }>;
-  };
-  
-  // Main pages with high priority
+  const lastMod = new Date().toISOString();
+
   const mainPages: PageType[] = [
     {
       url: '/',
-      lastMod: new Date().toISOString(),
       changeFreq: 'daily',
       priority: 1.0,
       images: [
         {
-          loc: '/card-rummy.webp',
-          title: 'Card Rummy - Official App Icon and Brand Image',
-          caption: "Card Rummy - Pakistan's #1 card game app. Play Teen Patti, Rummy, Dragon vs Tiger. Download Card Rummy APK for Android."
+          loc: '/zangi-app.webp',
+          title: 'Zangi Private Messenger',
+          caption: 'Download Zangi Private Messenger APK for Android',
         },
         {
-          loc: '/card-rummy-logo.webp',
-          title: 'Card Rummy Official Logo',
-          caption: "Official Card Rummy logo - Pakistan's premier card gaming platform"
-        }
-      ]
+          loc: '/zangi-banner.webp',
+          title: 'Zangi APP',
+          caption: 'Zangi Private Messenger overview',
+        },
+      ],
     },
-    {
-      url: '/download-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'weekly',
-      priority: 0.9,
-      images: [
-        {
-          loc: '/card-rummy.webp',
-          title: 'Download Card Rummy',
-          caption: 'Download Card Rummy APK for Android'
-        }
-      ]
-    },
-    {
-      url: '/deposit-money-in-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'weekly',
-      priority: 0.9
-    },
-    {
-      url: '/withdraw-money-from-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'weekly',
-      priority: 0.9
-    },
-    {
-      url: '/card-rummy-for-pc',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'weekly',
-      priority: 0.9,
-      images: [
-        {
-          loc: '/card-rummy.webp',
-          title: 'Card Rummy for PC',
-          caption: 'Play Card Rummy on PC using Android Emulator'
-        }
-      ]
-    },
-    {
-      url: '/about-us',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.7,
-      images: [
-        {
-          loc: '/card-rummy.webp',
-          title: 'About Card Rummy',
-          caption: 'Learn about Card Rummy gaming platform'
-        }
-      ]
-    },
-    {
-      url: '/blog',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'weekly',
-      priority: 0.8,
-      images: [
-        {
-          loc: '/card-rummy.webp',
-          title: 'Card Rummy Blog',
-          caption: 'Guides and tutorials for Card Rummy gaming platform'
-        }
-      ]
-    },
-    {
-      url: '/contact-us',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.7
-    },
-    {
-      url: '/privacy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'yearly',
-      priority: 0.6
-    },
-    {
-      url: '/disclaimer',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'yearly',
-      priority: 0.6
-    }
+    { url: '/zangi-for-pc', changeFreq: 'weekly', priority: 0.9 },
+    { url: '/zangi-app-for-ios', changeFreq: 'weekly', priority: 0.9 },
+    { url: '/zangi-for-business', changeFreq: 'weekly', priority: 0.9 },
+    { url: '/about-us', changeFreq: 'monthly', priority: 0.7 },
+    { url: '/blog', changeFreq: 'weekly', priority: 0.8 },
+    { url: '/contact-us', changeFreq: 'monthly', priority: 0.7 },
+    { url: '/privacy-policy', changeFreq: 'yearly', priority: 0.5 },
+    { url: '/disclaimer', changeFreq: 'yearly', priority: 0.5 },
   ];
 
-  // Blog posts
-  const blogPosts: PageType[] = [
-    {
-      url: '/blog/is-card-rummy-real-or-fake',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/create-card-rummy-account-and-login',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/tips-to-win-big-in-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/ips-exceed-issue-card-rummy-how-to-fix',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/card-rummy-old-version-features-review-2026',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/card-rummy-latest-version-new-features-2026-updates',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/ways-to-earn-money-with-card-rummy-2026',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/card-rummy-referral-program',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/3patti-room-vs-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/how-to-use-card-rummy-app-pakistan-guide-2026',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/3patti-blue-vs-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/dragon-vs-tiger-andar-bahar-high-payout-games',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/3patti-lucky-vs-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/card-rummy-tips-10-smart-tricks',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/3patti-gold-vs-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/card-rummy-app-review-2026',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/card-rummy-bonuses-vip-guide',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/responsible-gaming-guide-card-rummy',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: '/blog/is-card-rummy-safe-legal-pakistan',
-      lastMod: new Date().toISOString(),
-      changeFreq: 'monthly',
-      priority: 0.8
-    },
-  ];
+  const posts: PageType[] = [
+    'why-zangi',
+    'no-phone-number-messaging-app',
+    'zangi-security-and-privacy',
+    'zangi-voice-video-call-quality',
+    'how-zangi-uses-less-internet-data',
+    'zangi-app-file-sharing-limits-formats',
+    'zangi-group-chats-broadcast-features',
+    'zangi-cloud-vs-local-storage-explained',
+    'does-zangi-use-end-to-end-encryption',
+    'can-zangi-be-tracked-or-hacked',
+    'is-zangi-safe-for-journalists-activists',
+    'zangi-app-not-working-common-problems-how-to-fix-them',
+    'zangi-vs-whatsapp-telegram-signal-skype-viber',
+  ].map((slug) => ({
+    url: `/${slug}`,
+    changeFreq: 'monthly',
+    priority: 0.8,
+  }));
 
-  // Only include existing pages
-  const allPages = [...mainPages, ...blogPosts];
-  
-  // Generate XML with mobile and image extensions
+  const allPages = [...mainPages, ...posts];
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  ${allPages.map(page => `
+  ${allPages
+    .map(
+      (page) => `
   <url>
-    <loc>${baseUrl}${page.url}</loc>
-    <lastmod>${page.lastMod}</lastmod>
+    <loc>${SITE_URL}${page.url}</loc>
+    <lastmod>${lastMod}</lastmod>
     <changefreq>${page.changeFreq}</changefreq>
     <priority>${page.priority}</priority>
     <mobile:mobile/>
-    ${page.images?.map(img => `
+    ${
+      page.images
+        ?.map(
+          (img) => `
     <image:image>
-      <image:loc>${baseUrl}${img.loc}</image:loc>
+      <image:loc>${SITE_URL}${img.loc}</image:loc>
       <image:title>${img.title}</image:title>
       <image:caption>${img.caption}</image:caption>
-    </image:image>`).join('') || ''}
-  </url>
-  `).join('')}
+    </image:image>`
+        )
+        .join('') || ''
+    }
+  </url>`
+    )
+    .join('')}
 </urlset>`;
 
   return new NextResponse(sitemap, {
     headers: {
       'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=3600, s-maxage=86400'
-    }
+      'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+    },
   });
-} 
+}

@@ -1,312 +1,212 @@
-import Link from 'next/link';
 import { Metadata } from 'next';
+import Link from 'next/link';
+import { SITE_URL, SITE_NAME, BRAND } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Card Rummy Blog - Guides, Tips, Reviews & Tutorials 2026',
-  description: 'Complete Card Rummy blog 2026: App reviews, comparison guides, beginner tutorials, tips & tricks, bonuses guide, safety tips, and responsible gaming. Everything you need to know!',
-  keywords: [
-    'Card Rummy blog',
-    'Card Rummy guide',
-    'Card Rummy review',
-    'Card Rummy tips',
-    'Card Rummy tutorial',
-    'Card Rummy comparison',
-    'Card Rummy bonuses',
-    'Card Rummy safe',
-    'Card Rummy legal',
-    'Card Rummy Pakistan 2026'
-  ],
+  title: `${BRAND} Blog – Privacy, Security & Messaging Guides – ${SITE_NAME}`,
+  description: `In-depth guides and articles about ${BRAND} Private Messenger: security, privacy, call quality, data usage, troubleshooting, and comparisons with other messaging apps.`,
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
-  alternates: {
-    canonical: "https://cardrummyapp.com.pk/blog",
+  alternates: { canonical: `${SITE_URL}/blog` },
+  openGraph: {
+    title: `${BRAND} Blog – Privacy, Security & Messaging Guides`,
+    description: `Guides, tips, and in-depth articles about ${BRAND} Private Messenger.`,
+    url: `${SITE_URL}/blog`,
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    type: 'website',
   },
 };
 
-export default function Blog() {
+const posts = [
+  {
+    href: '/why-zangi',
+    title: 'Why Zangi? Everything You Need to Know About the Private Messenger',
+    desc: 'Unmatched security, ultra-low data usage, no phone number required, and 100% free. Here\'s why millions choose Zangi.',
+    date: 'January 2025',
+    readTime: '10 min read',
+    featured: true,
+  },
+  {
+    href: '/no-phone-number-messaging-app',
+    title: 'Zangi App – Secure Messaging Without Phone Number or SIM',
+    desc: 'How to create a Zangi account anonymously without a phone number or SIM card, and why it is safe.',
+    date: 'January 2025',
+    readTime: '6 min read',
+  },
+  {
+    href: '/zangi-security-and-privacy',
+    title: 'Zangi Security and Privacy – How Zangi Keeps You Safe',
+    desc: 'End-to-end encryption by default, zero data collection, and multi-layer military-grade security explained.',
+    date: 'January 2025',
+    readTime: '8 min read',
+  },
+  {
+    href: '/zangi-voice-video-call-quality',
+    title: 'Zangi Voice & Video Call Quality – How It Performs on Low Bandwidth',
+    desc: 'Adaptive bitrate, peer-to-peer optimization, and advanced audio compression keep calls clear even on 2G.',
+    date: 'January 2025',
+    readTime: '5 min read',
+  },
+  {
+    href: '/how-zangi-uses-less-internet-data',
+    title: 'How Zangi Uses Less Internet Data',
+    desc: 'Smart compression, lightweight packets, and an adaptive transmission system reduce data usage by up to 6×.',
+    date: 'February 2025',
+    readTime: '5 min read',
+  },
+  {
+    href: '/zangi-app-file-sharing-limits-formats',
+    title: 'Zangi App File Sharing – Limits & Formats',
+    desc: 'Supported file formats, direct transfer without cloud servers, and performance on slow networks.',
+    date: 'February 2025',
+    readTime: '5 min read',
+  },
+  {
+    href: '/zangi-group-chats-broadcast-features',
+    title: 'Zangi Group Chats & Broadcast Features',
+    desc: 'How Zangi group chats and broadcast messaging work — private, efficient, and optimized for slow networks.',
+    date: 'February 2025',
+    readTime: '5 min read',
+  },
+  {
+    href: '/zangi-cloud-vs-local-storage-explained',
+    title: 'Zangi Cloud vs Local Storage Explained',
+    desc: 'How Zangi balances local storage and optional cloud use to maximize privacy and minimize data risk.',
+    date: 'February 2025',
+    readTime: '5 min read',
+  },
+  {
+    href: '/does-zangi-use-end-to-end-encryption',
+    title: 'Does Zangi Use End-to-End Encryption?',
+    desc: 'Yes — Zangi encrypts all messages, calls, and files end-to-end. Here is how the encryption works.',
+    date: 'February 2025',
+    readTime: '6 min read',
+  },
+  {
+    href: '/can-zangi-be-tracked-or-hacked',
+    title: 'Can Zangi Be Tracked or Hacked?',
+    desc: 'Zangi\'s serverless architecture, multi-layer encryption, and no-data-collection policy make tracking extremely difficult.',
+    date: 'February 2025',
+    readTime: '6 min read',
+  },
+  {
+    href: '/is-zangi-safe-for-journalists-activists',
+    title: 'Is Zangi Safe for Journalists and Activists?',
+    desc: 'Anonymous accounts, no server-side data, and multi-layer encryption make Zangi a strong choice for high-risk users.',
+    date: 'February 2025',
+    readTime: '7 min read',
+  },
+  {
+    href: '/zangi-app-not-working-common-problems-how-to-fix-them',
+    title: 'Zangi App Not Working? Common Problems & How to Fix Them',
+    desc: 'Practical troubleshooting guide for crashes, call failures, notification issues, login errors, and more.',
+    date: 'March 2025',
+    readTime: '7 min read',
+  },
+  {
+    href: '/zangi-vs-whatsapp-telegram-signal-skype-viber',
+    title: 'Zangi vs WhatsApp, Telegram, Signal, Skype & Viber',
+    desc: 'In-depth comparison of Zangi against five popular messaging apps across privacy, data usage, call quality, and features.',
+    date: 'March 2025',
+    readTime: '10 min read',
+  },
+];
+
+export default function BlogPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-accent">Card Rummy Blog</h1>
-      <p className="text-gray-300 mb-8 text-lg">Stay updated with the latest guides, tips, and tutorials for Card Rummy</p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* Featured Post - App Review */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-[#FFA500]">
-          <div className="inline-block bg-[#FFA500] text-white text-xs font-bold px-3 py-1 rounded-full mb-3">
-            ⭐ FEATURED
-          </div>
-          <h2 className="text-2xl font-bold mb-4 text-white">Card Rummy App Review 2026</h2>
-          <p className="text-gray-300 mb-4">Complete honest review: Features, pros, cons, payout speed, and real user experience. Is Card Rummy worth it?</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>18 min read</span>
-          </div>
-          <Link href="/blog/card-rummy-app-review-2026" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
+    <div className="page-shell">
+      <div className="container mx-auto">
+        <div className="max-w-3xl mx-auto">
+          <Breadcrumbs
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Blog' },
+            ]}
+          />
 
-        {/* Is Card Rummy Real or Fake */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Is Card Rummy Real or Fake to Earn Money?</h2>
-          <p className="text-gray-300 mb-4">Discover the truth about Card Rummy legitimacy, payment methods, and how to identify fake apps. Complete guide for 2026.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>7 min read</span>
-          </div>
-          <Link href="/blog/is-card-rummy-real-or-fake" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-ink">{BRAND} Blog</h1>
+          <p className="text-mute mb-10 text-lg">
+            In-depth guides, security explainers, and tips for {BRAND} Private Messenger users.
+          </p>
 
-        {/* How to Use Card Rummy Guide */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">How to Use Card Rummy App in Pakistan: Complete Beginner's Guide 2026</h2>
-          <p className="text-gray-300 mb-4">Step-by-step guide: Download, registration, deposit, withdrawal, gameplay & earning tips. Perfect for beginners!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>15 min read</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map(({ href, title, desc, date, readTime, featured }) => (
+              <div
+                key={href}
+                className={`bg-secondary px-4 py-5 sm:px-6 sm:py-6 rounded-lg hover:shadow-lg transition-all border-2 ${
+                  featured ? 'border-brand' : 'border-line hover:border-brand'
+                }`}
+              >
+                {featured && (
+                  <div className="inline-block bg-brand text-ink text-xs font-bold px-3 py-1 rounded-full mb-3">
+                    FEATURED
+                  </div>
+                )}
+                <h2 className="text-xl font-bold mb-3 text-ink leading-snug">{title}</h2>
+                <p className="text-mute mb-4 text-sm leading-relaxed">{desc}</p>
+                <div className="flex items-center gap-2 text-xs text-mute mb-4">
+                  <span>{date}</span>
+                  <span>•</span>
+                  <span>{readTime}</span>
+                </div>
+                <Link href={href} className="text-brand hover:underline font-semibold text-sm">
+                  Read More →
+                </Link>
+              </div>
+            ))}
           </div>
-          <Link href="/blog/how-to-use-card-rummy-app-pakistan-guide-2026" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
 
-        {/* Create Account */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">How to Create a Card Rummy Account and Login</h2>
-          <p className="text-gray-300 mb-4">Learn how to create your Card Rummy account and login to start playing your favorite games and earning real money.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>5 min read</span>
+          {/* Explore Pages */}
+          <div className="mt-16 bg-white border border-line rounded-xl p-8 md:p-10">
+            <h2 className="text-2xl font-bold text-ink mb-6">Explore More About {BRAND}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {[
+                { href: '/zangi-for-pc', label: 'Zangi for PC' },
+                { href: '/zangi-app-for-ios', label: 'Zangi for iOS' },
+                { href: '/zangi-for-business', label: 'Zangi for Business' },
+                { href: '/about-us', label: 'About Us' },
+                { href: '/contact-us', label: 'Contact Us' },
+                { href: '/privacy-policy', label: 'Privacy Policy' },
+              ].map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="block bg-secondary rounded-xl p-4 text-center text-mute hover:text-brand hover:border-brand border border-line transition-colors text-sm font-medium"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
-          <Link href="/blog/create-card-rummy-account-and-login" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-        
-        {/* Tips to Win Big */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Tips to Win Big in Card Rummy</h2>
-          <p className="text-gray-300 mb-4">Discover expert strategies and tips to maximize your winnings in Teen Patti, Rummy, and other card games.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>6 min read</span>
-          </div>
-          <Link href="/blog/tips-to-win-big-in-card-rummy" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* 10 Smart Tricks */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Card Rummy Tips: 10 Smart Tricks to Play Safely and Win More</h2>
-          <p className="text-gray-300 mb-4">Proven tips and tricks: Bankroll management, game selection, bonus maximization & safe play strategies to increase winnings.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>13 min read</span>
-          </div>
-          <Link href="/blog/card-rummy-tips-10-smart-tricks" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* High Payout Games */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Dragon vs Tiger, Andar Bahar & More: Best High-Payout Games</h2>
-          <p className="text-gray-300 mb-4">Discover the best high-payout games in Card Rummy: Which games offer highest win rates & fastest earnings in Pakistan 2026!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>12 min read</span>
-          </div>
-          <Link href="/blog/dragon-vs-tiger-andar-bahar-high-payout-games" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* Bonuses & VIP Guide */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Card Rummy Bonuses Explained: Welcome Bonus, Recharge Rebate, and VIP Rewards Guide</h2>
-          <p className="text-gray-300 mb-4">Complete bonuses guide: Welcome bonus, recharge rebate, VIP levels, referral commission & step-by-step guide to maximize rewards.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>16 min read</span>
-          </div>
-          <Link href="/blog/card-rummy-bonuses-vip-guide" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* Is Card Rummy Safe */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Is Card Rummy Safe and Legal in Pakistan? Risks, Rules, and Safe Play Tips</h2>
-          <p className="text-gray-300 mb-4">Complete safety guide: Legal status, risks, security measures, withdrawal safety, and tips for safe play. Know before you play!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>14 min read</span>
-          </div>
-          <Link href="/blog/is-card-rummy-safe-legal-pakistan" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* Responsible Gaming */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Responsible Gaming Guide: How to Enjoy Card Rummy Without Addiction or Big Losses</h2>
-          <p className="text-gray-300 mb-4">Essential guide: How to play safely, avoid addiction, set limits, recognize warning signs, and enjoy gaming without financial harm.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>15 min read</span>
-          </div>
-          <Link href="/blog/responsible-gaming-guide-card-rummy" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* 3Patti Blue Comparison */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">3Patti Blue vs Card Rummy: Which Game Is Better for Earning Real Cash?</h2>
-          <p className="text-gray-300 mb-4">Complete comparison: Features, bonuses, withdrawal speed, game variety & earning potential. Find out which app pays better!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>8 min read</span>
-          </div>
-          <Link href="/blog/3patti-blue-vs-card-rummy" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* 3Patti Gold Comparison */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">3Patti Gold vs Card Rummy: Which Game Is Better for Earning Real Cash?</h2>
-          <p className="text-gray-300 mb-4">Detailed comparison: Bonuses, games, withdrawal speed & earning analysis. Discover which app is better for Pakistan players!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>9 min read</span>
-          </div>
-          <Link href="/blog/3patti-gold-vs-card-rummy" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* 3Patti Lucky Comparison */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">3Patti Lucky vs Card Rummy: Which Game Is Better for Earning Real Cash?</h2>
-          <p className="text-gray-300 mb-4">Detailed comparison: Games, bonuses, payout speed & earning analysis. Find the best real money app for Pakistan!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>10 min read</span>
-          </div>
-          <Link href="/blog/3patti-lucky-vs-card-rummy" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* 3Patti Room Comparison */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">3Patti Room vs Card Rummy: Which Game Is Better for Earning Real Cash?</h2>
-          <p className="text-gray-300 mb-4">Comprehensive comparison: Features, bonuses, withdrawal speed & real earning potential for Pakistan players!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 January 2026</span>
-            <span>•</span>
-            <span>11 min read</span>
-          </div>
-          <Link href="/blog/3patti-room-vs-card-rummy" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* IPs Exceed Issue */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">IPs Exceed Issue in Card Rummy! How to Fix?</h2>
-          <p className="text-gray-300 mb-4">Getting IPs Exceed error? Learn what causes it, how to fix it, and prevent it. Complete troubleshooting guide for Pakistan players 2026.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 March 2026</span>
-            <span>•</span>
-            <span>8 min read</span>
-          </div>
-          <Link href="/blog/ips-exceed-issue-card-rummy-how-to-fix" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* Card Rummy Old Version */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Card Rummy Old Version: Features Review and Details 2026</h2>
-          <p className="text-gray-300 mb-4">Classic features, legacy games, UI comparison, and why some players prefer older versions. Complete features & details for 2026.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 March 2026</span>
-            <span>•</span>
-            <span>10 min read</span>
-          </div>
-          <Link href="/blog/card-rummy-old-version-features-review-2026" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* Card Rummy Latest Version */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Card Rummy Latest Version: New Features and 2026 Updates</h2>
-          <p className="text-gray-300 mb-4">Card Rummy V1.231: New features, improvements, UI updates, and 2026 changes. What&apos;s new and why you should update now.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 March 2026</span>
-            <span>•</span>
-            <span>9 min read</span>
-          </div>
-          <Link href="/blog/card-rummy-latest-version-new-features-2026-updates" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* Ways to Earn Money */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Ways to Earn Money with Card Rummy in 2026</h2>
-          <p className="text-gray-300 mb-4">Complete guide: Weekly bonuses, daily bonus, sports bonus, progress bonus, daily referee & more. Maximize your income!</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 March 2026</span>
-            <span>•</span>
-            <span>14 min read</span>
-          </div>
-          <Link href="/blog/ways-to-earn-money-with-card-rummy-2026" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
-        </div>
-
-        {/* Referral Program */}
-        <div className="bg-secondary px-8 py-8 rounded-lg hover:shadow-lg transition-all border-2 border-gray-700 hover:border-accent">
-          <h2 className="text-2xl font-bold mb-4 text-white">Card Rummy Referral Program: Earn More by Inviting Friends and Family</h2>
-          <p className="text-gray-300 mb-4">How referral codes work, signup steps, rewards for you and your invites, and tips to earn more—aligned with Pakistan players and official app features.</p>
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <span>📅 March 2026</span>
-            <span>•</span>
-            <span>12 min read</span>
-          </div>
-          <Link href="/blog/card-rummy-referral-program" className="text-accent hover:underline font-semibold">
-            Read More →
-          </Link>
         </div>
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${BRAND} Blog`,
+            description: `In-depth guides and articles about ${BRAND} Private Messenger`,
+            url: `${SITE_URL}/blog`,
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: posts.map(({ href, title }, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                name: title,
+                url: `${SITE_URL}${href}`,
+              })),
+            },
+          }),
+        }}
+      />
     </div>
   );
-} 
+}

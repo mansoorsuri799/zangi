@@ -4,16 +4,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import MobileNavigation from './MobileNavigation';
+import { DOWNLOAD_URL } from '@/lib/site';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/download-card-rummy', label: 'Download' },
-  { href: '/deposit-money-in-card-rummy', label: 'Deposit' },
-  { href: '/withdraw-money-from-card-rummy', label: 'Withdraw' },
-  { href: '/card-rummy-for-pc', label: 'PC Version' },
-  { href: '/about-us', label: 'About Us' },
+  { href: '/zangi-for-pc', label: 'PC' },
+  { href: '/zangi-app-for-ios', label: 'iOS' },
+  { href: '/zangi-for-business', label: 'Business' },
   { href: '/blog', label: 'Blog' },
-  { href: '/contact-us', label: 'Contact Us' },
+  { href: '/about-us', label: 'About' },
+  { href: '/contact-us', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -25,51 +25,42 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-primary py-3 px-4 md:px-8 sticky top-0 z-30 border-b border-gray-800">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <div className="relative h-10 w-10 mr-2">
-            <Image
-              src="/card-rummy.webp"
-              alt="Card Rummy Logo"
-              width={40}
-              height={40}
-              className="object-contain"
-              priority={true}
-              fetchPriority="high"
-            />
-          </div>
-          <span className="text-accent text-xl md:text-2xl font-bold">
-            Card Rummy
-          </span>
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-line supports-[backdrop-filter]:bg-white/90">
+      <div className="max-w-3xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between gap-3 min-w-0">
+        <Link href="/" className="flex items-center gap-2 min-w-0 shrink">
+          <Image
+            src="/zangi-app.webp"
+            alt="Zangi"
+            width={32}
+            height={32}
+            className="rounded w-8 h-8"
+            priority
+          />
+          <span className="font-semibold text-ink text-base sm:text-lg truncate">Zangi</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex items-center gap-5 text-sm">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`relative font-medium transition-colors pb-1 group ${
-                isActive(href)
-                  ? 'text-accent'
-                  : 'text-white hover:text-accent'
-              }`}
+              className={isActive(href) ? 'text-brand font-medium' : 'text-mute hover:text-ink'}
             >
               {label}
-              <span
-                className={`absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ${
-                  isActive(href) ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}
-              />
             </Link>
           ))}
         </nav>
 
-        {/* Mobile Navigation */}
-        <MobileNavigation />
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <a
+            href={DOWNLOAD_URL}
+            className="hidden sm:inline-flex items-center min-h-[36px] text-sm font-semibold text-white bg-brand px-3 py-1.5 rounded hover:bg-brand-deep"
+          >
+            Download
+          </a>
+          <MobileNavigation />
+        </div>
       </div>
     </header>
   );
-} 
+}

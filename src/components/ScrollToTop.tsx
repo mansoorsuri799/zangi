@@ -46,7 +46,8 @@ export default function ScrollToTop() {
       {isVisible && !isMobileMenuOpen && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 p-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 rounded-full shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300 group"
+          className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 min-h-11 min-w-11 inline-flex items-center justify-center p-2.5 bg-brand text-white rounded-md shadow hover:bg-brand-deep transition-colors"
+          style={{ marginBottom: 'env(safe-area-inset-bottom)' }}
           aria-label="Scroll to top"
         >
           <svg

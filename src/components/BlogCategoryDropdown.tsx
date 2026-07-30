@@ -1,52 +1,47 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
-const BlogCategoryDropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  
-  const categories = [
-    { name: 'Account & Login', href: '/blog/create-card-rummy-account-and-login' },
-  ];
+const categories = [
+  { name: 'Why Zangi', href: '/why-zangi' },
+  { name: 'Security', href: '/zangi-security-and-privacy' },
+  { name: 'No Phone Number', href: '/no-phone-number-messaging-app' },
+  { name: 'Comparisons', href: '/zangi-vs-whatsapp-telegram-signal-skype-viber' },
+  { name: 'Troubleshooting', href: '/zangi-app-not-working-common-problems-how-to-fix-them' },
+];
+
+export default function BlogCategoryDropdown() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="relative mb-8">
+    <div className="relative inline-block text-left">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full md:w-64 px-4 py-2 bg-secondary text-white rounded-md"
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface border border-line text-ink text-sm font-semibold hover:border-brand transition-colors"
+        aria-expanded={open}
       >
-        <span>Select Category</span>
-        <svg
-          className={`w-5 h-5 transition-transform ${isOpen ? 'transform rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        Categories
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      
-      {isOpen && (
-        <div className="absolute z-10 w-full md:w-64 mt-1 bg-secondary rounded-md shadow-lg">
-          <ul className="py-1">
-            {categories.map((category) => (
-              <li key={category.name}>
-                <Link 
-                  href={category.href}
-                  className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+      {open && (
+        <ul className="absolute z-20 mt-2 w-56 rounded-xl bg-surface border border-line shadow-soft py-1">
+          {categories.map((c) => (
+            <li key={c.href}>
+              <Link
+                href={c.href}
+                className="block px-4 py-2 text-sm text-muted hover:bg-brand-soft hover:text-brand"
+                onClick={() => setOpen(false)}
+              >
+                {c.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
-};
-
-export default BlogCategoryDropdown; 
+}

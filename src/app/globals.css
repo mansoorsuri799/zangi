@@ -3,84 +3,167 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 2, 6, 23;
-  --background-end-rgb: 2, 6, 23;
+  --ink: #111111;
+  --mute: #555555;
+  --line: #e5e5e5;
+  --brand: #3070f0;
+  --page: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--ink);
+  background: var(--page);
+  overflow-x: hidden;
+  min-width: 0;
 }
 
-/* Prevent CLS by ensuring images don't shift layout */
+/* Prevent Next/Image fill conflicts; keep responsive intrinsic images */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* Footer: contain layout to reduce CLS from reflow */
-footer {
-  contain: layout;
+img[data-nimg='fill'] {
+  max-width: none;
+  height: 100%;
 }
 
-/* Prevent font-related layout shifts */
-* {
-  font-family: inherit;
+::selection {
+  background: #e8f0fe;
+  color: var(--ink);
 }
 
+.stars-bg,
+.grain,
+.mesh-bg {
+  display: none !important;
+}
 
-/* main: no forced min-height - prevents footer from shifting when main expands late */
-
-
-
+/* Simple download button — full width on small screens */
+.cta-btn,
 .download-btn {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--brand);
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.35rem;
+  min-height: 44px;
+  border-radius: 6px;
+  border: none;
+  text-decoration: none !important;
+  transition: background 0.15s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
+@media (min-width: 640px) {
+  .cta-btn,
+  .download-btn {
+    width: auto;
+  }
+}
+
+.cta-btn:hover,
 .download-btn:hover {
-  transform: translateY(-2px);
+  background: #2454b4;
 }
 
-.download-btn:hover .download-icon {
-  animation: bounce 0.5s ease infinite;
+.cta-btn .cta-icon,
+.download-btn .download-icon {
+  display: none;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
+/* Content prose */
+.article {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+.article h2 {
+  @apply text-xl sm:text-2xl font-bold text-ink mt-10 sm:mt-12 mb-3 sm:mb-4;
 }
 
-.stat-card {
-  background: rgba(10, 16, 41, 0.8);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
+.article h3 {
+  @apply text-base sm:text-lg font-semibold text-ink mt-6 sm:mt-8 mb-2;
 }
 
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+.article p {
+  @apply text-mute leading-relaxed mb-4 text-[15px] sm:text-base;
 }
 
-/* Prevent layout shift by ensuring content takes up space */
-.stars-bg {
-  pointer-events: none;
-} 
+.article ul {
+  @apply list-disc pl-5 space-y-2 text-mute mb-4 text-[15px] sm:text-base;
+}
+
+.article a {
+  @apply text-brand underline-offset-2 hover:underline;
+}
+
+.article a.cta-btn,
+.article a.download-btn {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.article a.cta-btn:hover,
+.article a.download-btn:hover {
+  color: #fff !important;
+  text-decoration: none;
+  background: #2454b4;
+}
+
+.article img {
+  @apply my-6 sm:my-8;
+}
+
+.article figure img {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Tables never blow out the viewport */
+.article .overflow-x-auto,
+.table-scroll {
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Shared page shell helpers */
+.page-shell {
+  @apply py-6 sm:py-10 px-4;
+}
+
+.page-card {
+  @apply bg-white border border-line rounded-xl p-4 sm:p-6 md:p-8;
+}
+
+.hero-media {
+  @apply w-full max-w-[160px] sm:max-w-[180px] md:max-w-[200px] mx-auto;
+}
+
+.hero-media img {
+  @apply w-full h-auto block;
+}

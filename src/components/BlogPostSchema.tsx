@@ -1,10 +1,11 @@
-import { imageObjectLicensing } from "@/lib/schemaImageLicensing";
-
-const BASE = "https://cardrummyapp.com.pk";
+import { SITE_URL, BRAND } from '@/lib/site';
+import { imageObjectSchema } from '@/lib/schemaImageLicensing';
 
 function safeJsonLd(obj: object): string {
-  return JSON.stringify(obj).replace(/</g, "\\u003c");
+  return JSON.stringify(obj).replace(/</g, '\\u003c');
 }
+
+type FaqItem = { q: string; a: string };
 
 type BlogPostSchemaProps = {
   title: string;
@@ -14,8 +15,9 @@ type BlogPostSchemaProps = {
   dateModified?: string;
   image?: string;
   breadcrumbOnly?: boolean;
-  /** Key summary or first 2-3 paragraphs for AI parsing and articleBody */
   articleBody?: string;
+  path?: string;
+  faqs?: FaqItem[];
 };
 
 export default function BlogPostSchema({
@@ -24,55 +26,74 @@ export default function BlogPostSchema({
   slug,
   datePublished,
   dateModified,
-  image = `${BASE}/card-rummy-logo.webp`,
+  image = `${SITE_URL}/zangi-app.webp`,
   breadcrumbOnly = false,
   articleBody,
+  path,
+  faqs,
 }: BlogPostSchemaProps) {
-  const url = `${BASE}/blog/${slug}`;
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: BASE },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${BASE}/blog` },
-      { "@type": "ListItem", position: 3, name: title, item: url },
-    ],
-  };
+  const resolvedPath = path ?? `/blog/${slug}`;
+  const url = `${SITE_URL}${resolvedPath}`;
+
   const article: Record<string, unknown> = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "@id": `${url}#article`,
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${url}#article`,
     headline: title,
     description,
     url,
-    image,
-    author: { "@type": "Organization", name: "Card Rummy", url: BASE },
+    image: imageObjectSchema({
+      url: image,
+      name: title,
+      description,
+      width: 1024,
+      height: 1024,
+    }),
+    author: { '@type': 'Organization', name: BRAND, url: SITE_URL },
     publisher: {
-      "@type": "Organization",
-      name: "Card Rummy",
-      logo: {
-        "@type": "ImageObject",
-        url: `${BASE}/card-rummy-logo.webp`,
-        ...imageObjectLicensing,
-        creditText: "Card Rummy logo",
-      },
+      '@type': 'Organization',
+      name: BRAND,
+      logo: imageObjectSchema({
+        url: '/zangi-app.webp',
+        name: `${BRAND} logo`,
+        description: `${BRAND} Private Messenger logo`,
+        width: 1024,
+        height: 1024,
+      }),
     },
     datePublished,
     dateModified: dateModified || datePublished,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    inLanguage: "en-US",
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    inLanguage: 'en-US',
     ...(articleBody && { articleBody }),
   };
+
+  const faqSchema =
+    faqs && faqs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          '@id': `${url}#faq`,
+          mainEntity: faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        }
+      : null;
+
+  if (breadcrumbOnly) return null;
+
   return (
-    <div suppressHydrationWarning style={{ display: "contents" }}>
+    <div suppressHydrationWarning style={{ display: 'contents' }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumb) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(article) }}
       />
-      {!breadcrumbOnly && (
+      {faqSchema && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(article) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
         />
       )}
     </div>
