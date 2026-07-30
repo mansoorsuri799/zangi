@@ -4,17 +4,28 @@
   "description": "Download Zangi Private Messenger — secure chat, offline mode, no phone number required.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F3F6FA",
+  "background_color": "#ffffff",
   "theme_color": "#3070F0",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "16x16 32x32 48x48",
-      "type": "image/x-icon"
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
     },
     {
       "src": "/zangi-app.webp",
-      "sizes": "192x192 512x512",
+      "sizes": "512x512",
       "type": "image/webp",
       "purpose": "any maskable"
     }

@@ -3,37 +3,49 @@ import { SITE_URL } from '@/lib/site';
 
 export async function GET() {
   const body = `# robots.txt for zangiapp.org
+# Allow search engines and AI answer engines to crawl public content.
 
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
+User-agent: Googlebot
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 User-agent: CCBot
-Disallow: /
-
-User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-Sitemap: ${SITE_URL}/sitemap.xml
 Sitemap: ${SITE_URL}/sitemap-index.xml
 `;
 
   return new NextResponse(body, {
     headers: {
-      'Content-Type': 'text/plain',
+      'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'public, max-age=86400',
     },
   });

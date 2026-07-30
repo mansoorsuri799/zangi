@@ -1,23 +1,41 @@
 # robots.txt for zangiapp.org
+# Allow search engines and AI answer engines to crawl public content.
 
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
+# Google Search + AI Overviews / Gemini grounding
+User-agent: Googlebot
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
+# OpenAI ChatGPT / SearchGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl / training corpora that many AI tools use
 User-agent: CCBot
-Disallow: /
-
-User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot

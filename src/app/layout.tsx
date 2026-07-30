@@ -51,10 +51,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", type: "image/x-icon", sizes: "any" },
-      { url: "/zangi-app.webp", type: "image/webp" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-48.png", type: "image/png", sizes: "48x48" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: "/zangi-app.webp" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
   },
   alternates: { canonical: SITE_URL },
   openGraph: {
@@ -76,12 +79,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={manrope.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/zangi-app.webp" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://dl.zangiapp.org" crossOrigin="anonymous" />
-        <Script id="deferred-manifest" strategy="lazyOnload">
-          {`(function(){var l=document.createElement('link');l.rel='manifest';l.href='/manifest.json';document.head.appendChild(l);})();`}
-        </Script>
         {typeof process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID === "string" &&
           process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID &&
           !/^G-XXXXXXXXXX$/i.test(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) && (
