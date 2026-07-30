@@ -25,7 +25,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-line supports-[backdrop-filter]:bg-white/90">
+    <header className="sticky top-0 z-40 bg-white border-b border-line">
       <div className="max-w-3xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between gap-3 min-w-0">
         <Link href="/" className="flex items-center gap-2 min-w-0 shrink">
           <Image

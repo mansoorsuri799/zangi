@@ -170,3 +170,7 @@ img[data-nimg='fill'] {
 .hero-media img {
   @apply w-full h-auto block;
 }
+
+.safe-pb {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
