@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTopWrapper from "@/components/ScrollToTopWrapper";
 import WebVitalsTracker from "@/components/WebVitalsTracker";
+import AdsterraAds from "@/components/AdsterraAds";
 import { MobileMenuProvider } from "@/components/MobileMenuProvider";
 import {
   SITE_URL,
@@ -111,6 +112,7 @@ export default function RootLayout({
         <MobileMenuProvider>
           <Header />
           <main className="flex-1">{children}</main>
+          <AdsterraAds />
           <Footer />
           <ScrollToTopWrapper />
         </MobileMenuProvider>
