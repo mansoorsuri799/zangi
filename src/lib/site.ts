@@ -2,7 +2,7 @@ export const SITE_URL = 'https://zangiapp.org';
 export const SITE_NAME = 'Zangi App';
 export const BRAND = 'Zangi';
 export const DOWNLOAD_URL =
-  'https://dl.zangiapp.org/file/zangiapp/zangi-private-messenger-by-zangiapp.org';
+  'https://dl.zangiapp.org/file/zangiapp.org/zangi-app-(zangiapp.org).xapk';
 /** Official Zangi iOS App Store listing */
 export const APP_STORE_URL =
   'https://apps.apple.com/us/app/zangi-private-messenger/id549493839';
